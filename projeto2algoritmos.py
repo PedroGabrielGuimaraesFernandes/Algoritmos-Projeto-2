@@ -70,6 +70,7 @@ def menu():
             func3(prices, titles)
             print()
         elif(num == 5):
+            relatorioHTML(categories, titles)
             #opção 5
             print()
         elif(num == 6):
@@ -228,7 +229,11 @@ def func3(prices, titles):
     print(tipocaros)
     print(tipobaratos)
 
-
+#item e)
+def relatorioHTML(categorias, produdos):
+     relatorio = open('C:\\Temp\\relatorio_produtos.html', 'w')
+     relatorio.write("Algo que será escrito no arquivo")
+     relatorio.close()
 
 
 
