@@ -1,6 +1,6 @@
-
-arquivo = open('C:\\Temp\\emack.csv', 'r')
+arquivo = open("C:/Users/Felipe/Desktop/Faculdade/Algoritmo e Programação I/Prática/Trabalho 2/emack.csv", 'r')
 #arquivo = open('C:\\Users\\Pedro Gabriel\\Documents\\Mackenzie\\Materias\\1semestre\\Algoritmos e programação\Algoritmos-Projeto-2-Pedro\\emack.csv', 'r')
+# para abrir no PC do Haddad: "C:/Users/Felipe/Desktop/Faculdade/Algoritmo e Programação I/Prática/Trabalho 2/emack.csv"
 #conteudo = arquivo.read()
 #inicialização das listas 
 ids =[]
@@ -31,6 +31,7 @@ del(listPrices[0])
 del(categories[0])
 del(isBestSeller[0])
 del(boughtLastMonth[0])
+boughtLastMonth = [item[:-1]for item in boughtLastMonth]
 
 #função contendo o menu
 def menu():
@@ -80,6 +81,7 @@ def menu():
         else:
             #se nemnhum opção for valida pede para o usuario digital algo valido
             print("Digite uma oção valida!!!")
+
 
 #item a
 #Função que faz a contagem das categorias
@@ -233,7 +235,7 @@ def func3(prices, titles):
 #item e)
 def relatorioHTML(categorias, produdos):
      relatorio = open('C:\\Temp\\relatorio_produtos.html', 'w')
-     relatorio.write("Algo que será escrito no arquivo")
+     relatorio.write("Algo que será escrito no arquivo")
      relatorio.close()
 
 #item f)
@@ -241,6 +243,11 @@ def relatorioHTML2(boughtLastMonth, titles, isBestSeller, categories):
 
     #livros
     livrotop10 = []
+    dic1 = {}
+    dic2 = {}
+    dic3 = {}
+    dic4 = {}
+    dic5 = {}
     modatop10 = []
     casatop10 = []
     esportetop10 = []
@@ -249,13 +256,65 @@ def relatorioHTML2(boughtLastMonth, titles, isBestSeller, categories):
         if categories[i] == "Livros" and isBestSeller[i] == "true":
             if len(livrotop10) <= 10:
                 livrotop10.append(boughtLastMonth[i])
-
-    print(livrotop10)
-                
-
-
+            else:
+                for b in range(len(livrotop10)):
+                    if int(boughtLastMonth[i]) > int(livrotop10[b]):
+                        livrotop10[b] = boughtLastMonth[i]
+                        break          
+        elif categories[i] == "Moda" and isBestSeller[i] == "true":
+            if len(modatop10) <= 10:
+                modatop10.append(boughtLastMonth[i])
+            else:                
+                for b in range(len(modatop10)):
+                    if int(boughtLastMonth[i]) > int(modatop10[b]):
+                        modatop10[b] = boughtLastMonth[i]
+                        break
+        elif categories[i] == "Casa" and isBestSeller[i] == "true":
+            if len(casatop10) <= 10:
+                casatop10.append(boughtLastMonth[i])
+            else:                
+                for b in range(len(casatop10)):
+                    if int(boughtLastMonth[i]) > int(casatop10[b]):
+                        casatop10[b] = boughtLastMonth[i]
+                        break
+        elif categories[i] == "Esportes" and isBestSeller[i] == "true":
+            if len(esportetop10) <= 10:
+                esportetop10.append(boughtLastMonth[i])
+            else:
+                for b in range(len(esportetop10)):
+                    if int(boughtLastMonth[i]) > int(esportetop10[b]):
+                        esportetop10[b] = boughtLastMonth[i]
+                        break
+        elif categories[i] == "EletrÃ´nicos" and isBestSeller[i] == "true":
+            if len(eletronicotop10) <= 10:
+                eletronicotop10.append(boughtLastMonth[i])
+            else:                
+                for b in range(len(eletronicotop10)):
+                    if int(boughtLastMonth[i]) > int(eletronicotop10[b]):
+                        eletronicotop10[b] = boughtLastMonth[i]
+                        break
+    livrotop10.sort(reverse=True)
+    modatop10.sort(reverse=True)                
+    casatop10.sort(reverse=True) 
+    esportetop10.sort(reverse=True)
+    eletronicotop10.sort(reverse=True)
+    for b in range(len(livrotop10)):
+        pos = boughtLastMonth.index(livrotop10[b])
+        dic1[f"{titles[pos]}"] = livrotop10[b]
+    for b in range(len(modatop10)):
+        pos = boughtLastMonth.index(modatop10[b])
+        dic2[f"{titles[pos]}"] = modatop10[b]
+    for b in range(len(casatop10)):
+        pos = boughtLastMonth.index(casatop10[b])
+        dic3[f"{titles[pos]}"] = casatop10[b]
+    for b in range(len(esportetop10)):
+        pos = boughtLastMonth.index(esportetop10[b])
+        dic4[f"{titles[pos]}"] = esportetop10[b]
+    for b in range(len(eletronicotop10)):
+        pos = boughtLastMonth.index(eletronicotop10[b])
+        dic5[f"{titles[pos]}"] = eletronicotop10[b]
 #relatorio = open('C:\\Temp\\relatorio_bestseller.html', 'w')
-#relatorio.write("Algo que será escrito no arquivo")
+#relatorio.write("Algo que será escrito no arquivo")
 #relatorio.close()
 
 
