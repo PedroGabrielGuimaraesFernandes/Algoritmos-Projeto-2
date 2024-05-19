@@ -1,6 +1,6 @@
 
-arquivo = open('C:\\Temp\\emack.csv', 'r')
-#arquivo = open('C:\\Users\\Pedro Gabriel\\Documents\\Mackenzie\\Materias\\1semestre\\Algoritmos e programação\Algoritmos-Projeto-2-Pedro\\emack.csv', 'r')
+#arquivo = open('C:\\Temp\\emack.csv', 'r')
+arquivo = open('C:\\Users\\Pedro Gabriel\\Documents\\Mackenzie\\Materias\\1semestre\\Algoritmos e programação\Algoritmos-Projeto-2-Pedro\\emack.csv', 'r')
 #conteudo = arquivo.read()
 #inicialização das listas 
 ids =[]
@@ -31,6 +31,8 @@ del(listPrices[0])
 del(categories[0])
 del(isBestSeller[0])
 del(boughtLastMonth[0])
+
+
 
 #função contendo o menu
 def menu():
@@ -235,14 +237,31 @@ def relatorioHTML(categories, produtos):
      while(aux != "Livros" and aux != "Moda" and aux != "Casa" and aux != "Esportes" and aux != "EletrÃ´nicos"):
           aux = input("Digite uma categoria(Livros, Moda, Casa, Esportes,EletrÃ´nicos)")
           
-     caminho =  f"C:\\Temp\\relatorio_produtos_{aux}.html"
+     #caminho =  f"C:\\Temp\\relatorio_produtos_{aux}.html"
+     caminho =  f"C:\\Users\\Pedro Gabriel\\Documents\\Mackenzie\\Materias\\1semestre\\Algoritmos e programação\Algoritmos-Projeto-2-Pedro\\relatorio_produtos_{aux}.html"
      relatorio = open(caminho, 'w')
+     
+     relatorio.write("<html>")
+     relatorio.write("<head>")
+     relatorio.write(f"<title> Relatorio Produtos {aux} </title>")
+     relatorio.write("</head>")
+     relatorio.write("<body>")
+     relatorio.write("<div>")
+     relatorio.write(f"<h1>Relatorio Produtos {aux}</h1>")
+     relatorio.write("<ul>")
      relatorio.write(f"{aux}")
      for i in range(len(categories)):
         if(categories[i] == aux):
-            relatorio.write(f"{produtos[i]}<br\> ")
+            relatorio.write(f"<li> {produtos[i]} </li> <br\> ")
+            
+
             relatorio.write("\n")
-             
+
+     relatorio.write("</ul>")
+     relatorio.write("</div>")
+     relatorio.write("</body>")
+     relatorio.write("</html>")
+
      relatorio.close()
 
 
