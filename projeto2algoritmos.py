@@ -1,5 +1,4 @@
-
-arquivo = open('C:\\Temp\\emack.csv', 'r')
+arquivo = open('C:\\Temp\\Algoritmos-Projeto-2-Pedro\\Algoritmos-Projeto-2-Pedro\\emack.csv', 'r')
 #arquivo = open('C:\\Users\\Pedro Gabriel\\Documents\\Mackenzie\\Materias\\1semestre\\Algoritmos e programação\Algoritmos-Projeto-2-Pedro\\emack.csv', 'r')
 #conteudo = arquivo.read()
 #inicialização das listas 
@@ -23,6 +22,8 @@ for linha in arquivo:
      isBestSeller.append(linha[5])
      boughtLastMonth.append(linha[6])
 
+arquivo.close()
+
 #Deleta oa primeiros itens de cada lista
 del(ids[0])
 del(titles[0])
@@ -31,6 +32,8 @@ del(listPrices[0])
 del(categories[0])
 del(isBestSeller[0])
 del(boughtLastMonth[0])
+
+
 
 #função contendo o menu
 def menu():
@@ -74,6 +77,7 @@ def menu():
             #opção 5
             print()
         elif(num == 6):
+            relatorioHTML2(boughtLastMonth, titles, isBestSeller, categories)
             #opção 6
             print()
         else:
@@ -230,12 +234,164 @@ def func3(prices, titles):
     print(tipobaratos)
 
 #item e)
-def relatorioHTML(categorias, produdos):
-     relatorio = open('C:\\Temp\\relatorio_produtos.html', 'w')
-     relatorio.write("Algo que será escrito no arquivo")
+def relatorioHTML(categories, produtos):
+     aux= ""
+     while(aux != "Livros" and aux != "Moda" and aux != "Casa" and aux != "Esportes" and aux != "EletrÃ´nicos"):
+          aux = input("Digite uma categoria(Livros, Moda, Casa, Esportes,EletrÃ´nicos)")
+          
+     caminho =  f"C:\\Temp\\Algoritmos-Projeto-2-Pedro\\Algoritmos-Projeto-2-Pedro\\relatorio_produtos_{aux}.html"
+     #caminho =  f"C:\\Users\\Pedro Gabriel\\Documents\\Mackenzie\\Materias\\1semestre\\Algoritmos e programação\Algoritmos-Projeto-2-Pedro\\relatorio_produtos_{aux}.html"
+     relatorio = open(caminho, 'w')
+     
+     relatorio.write("<html>")
+     relatorio.write("<head>")
+     relatorio.write(f"<title> Relatorio Produtos {aux} </title>")
+     relatorio.write("</head>")
+     relatorio.write("<body>")
+     relatorio.write("<div>")
+     relatorio.write(f"<h1>Relatorio Produtos {aux}</h1>")
+     relatorio.write("<ul>")
+     relatorio.write(f"{aux}")
+     for i in range(len(categories)):
+        if(categories[i] == aux):
+            relatorio.write(f"<li> {produtos[i]} </li> <br\> ")
+            
+
+            relatorio.write("\n")
+
+     relatorio.write("</ul>")
+     relatorio.write("</div>")
+     relatorio.write("</body>")
+     relatorio.write("</html>")
+
      relatorio.close()
 
+#item f)
+def relatorioHTML2(boughtLastMonth, titles, isBestSeller, categories):
 
+    #livros
+    livrotop10 = []
+    dic1 = {}
+    dic2 = {}
+    dic3 = {}
+    dic4 = {}
+    dic5 = {}
+    modatop10 = []
+    casatop10 = []
+    esportetop10 = []
+    eletronicotop10 = []
+    for i in range (len(categories)):
+        if categories[i] == "Livros" and isBestSeller[i] == "true":
+            if len(livrotop10) <= 10:
+                livrotop10.append(boughtLastMonth[i])
+            else:
+                for b in range(len(livrotop10)):
+                    if int(boughtLastMonth[i]) > int(livrotop10[b]):
+                        livrotop10[b] = boughtLastMonth[i]
+                        break          
+        elif categories[i] == "Moda" and isBestSeller[i] == "true":
+            if len(modatop10) <= 10:
+                modatop10.append(boughtLastMonth[i])
+            else:                
+                for b in range(len(modatop10)):
+                    if int(boughtLastMonth[i]) > int(modatop10[b]):
+                        modatop10[b] = boughtLastMonth[i]
+                        break
+        elif categories[i] == "Casa" and isBestSeller[i] == "true":
+            if len(casatop10) <= 10:
+                casatop10.append(boughtLastMonth[i])
+            else:                
+                for b in range(len(casatop10)):
+                    if int(boughtLastMonth[i]) > int(casatop10[b]):
+                        casatop10[b] = boughtLastMonth[i]
+                        break
+        elif categories[i] == "Esportes" and isBestSeller[i] == "true":
+            if len(esportetop10) <= 10:
+                esportetop10.append(boughtLastMonth[i])
+            else:
+                for b in range(len(esportetop10)):
+                    if int(boughtLastMonth[i]) > int(esportetop10[b]):
+                        esportetop10[b] = boughtLastMonth[i]
+                        break
+        elif categories[i] == "EletrÃ´nicos" and isBestSeller[i] == "true":
+            if len(eletronicotop10) <= 10:
+                eletronicotop10.append(boughtLastMonth[i])
+            else:                
+                for b in range(len(eletronicotop10)):
+                    if int(boughtLastMonth[i]) > int(eletronicotop10[b]):
+                        eletronicotop10[b] = boughtLastMonth[i]
+                        break
+    livrotop10.sort(reverse=True)
+    modatop10.sort(reverse=True)                
+    casatop10.sort(reverse=True) 
+    esportetop10.sort(reverse=True)
+    eletronicotop10.sort(reverse=True)
+    for b in range(len(livrotop10)):
+        pos = boughtLastMonth.index(livrotop10[b])
+        dic1[f"{titles[pos]}"] = livrotop10[b]
+    for b in range(len(modatop10)):
+        pos = boughtLastMonth.index(modatop10[b])
+        dic2[f"{titles[pos]}"] = modatop10[b]
+    for b in range(len(casatop10)):
+        pos = boughtLastMonth.index(casatop10[b])
+        dic3[f"{titles[pos]}"] = casatop10[b]
+    for b in range(len(esportetop10)):
+        pos = boughtLastMonth.index(esportetop10[b])
+        dic4[f"{titles[pos]}"] = esportetop10[b]
+    for b in range(len(eletronicotop10)):
+        pos = boughtLastMonth.index(eletronicotop10[b])
+        dic5[f"{titles[pos]}"] = eletronicotop10[b]
+
+    for produto in dic1:
+         print(produto)
+         
+    relatorio = open('C:\\Temp\\relatorio_bestseller.html', 'w')
+    relatorio.write("<html>")
+    relatorio.write("<head>")
+    relatorio.write(f"<title> Relatorio Bestseller </title>")
+    relatorio.write("</head>")
+    relatorio.write("<body>")
+    relatorio.write("<div>")
+    relatorio.write(f"<h1>Relatorio Bestseller</h1>")
+    
+    relatorio.write(f"<h2>Livros</h2>")
+    relatorio.write("<ul>")
+    for produto in dic1:
+        relatorio.write(f"<li> {produto} </li> <br/> ")
+    relatorio.write("</ul>")
+    
+    relatorio.write(f"<h2>Moda</h2>")
+    relatorio.write("<ul>")
+    for produto in dic2:
+        relatorio.write(f"<li> {produto} </li> <br/> ")
+    relatorio.write("</ul>")
+
+    relatorio.write(f"<h2>Casa</h2>")
+    relatorio.write("<ul>")
+    for produto in dic3:
+        relatorio.write(f"<li> {produto} </li> <br/> ")
+    relatorio.write("</ul>")
+
+    relatorio.write(f"<h2>Esportes</h2>")
+    relatorio.write("<ul>")
+    for produto in dic4:
+        relatorio.write(f"<li> {produto} </li> <br/> ")
+    relatorio.write("</ul>")
+
+    relatorio.write(f"<h2>Eletrônicos</h2>")
+    relatorio.write("<ul>")
+    for produto in dic5:
+        relatorio.write(f"<li> {produto} </li> <br/> ")
+    relatorio.write("</ul>")
+    
+    relatorio.write("</div>")
+    relatorio.write("</body>")
+    relatorio.write("</html>")
+    relatorio.write("Algo que será escrito no arquivo")
+    relatorio.close()
+
+
+print(arquivo)
 
 #Cham a função que faz o menu e loop
 menu()
