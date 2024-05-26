@@ -1,3 +1,10 @@
+'''
+Trabalho 2 - Algoritmo e Programação
+Integrantes:
+Felipe Bertacco Haddad
+Pedro Gabriel
+'''
+
 arquivo = open("C:/Users/Felipe/Desktop/Faculdade/Algoritmo e Programação I/Prática/Trabalho 2/emack.csv", 'r')
 #arquivo = open('C:\\Users\\Pedro Gabriel\\Documents\\Mackenzie\\Materias\\1semestre\\Algoritmos e programação\Algoritmos-Projeto-2-Pedro\\emack.csv', 'r')
 # para abrir no PC do Haddad: "C:/Users/Felipe/Desktop/Faculdade/Algoritmo e Programação I/Prática/Trabalho 2/emack.csv"
